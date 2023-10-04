@@ -235,30 +235,30 @@ install_tls() {
     questions4
 }
 
-read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
-if [ "$server_choice" == "1" ]; then
-    read -p "Enter foreign IP [External-ip] : " foreign_ip
-    read -p "Please Enter servers connection Port : " port
-    read -p "Please Enter your Config Port : " config_port
-    read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
-    connection_type=${connection_type:-tcp}
-    argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+quic://$foreign_ip:$port"
+questions5() {
+    read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
+    if [ "$server_choice" == "1" ]; then
+        read -p "Enter foreign IP [External-ip] : " foreign_ip
+        read -p "Please Enter servers connection Port : " port
+        read -p "Please Enter your Config Port : " config_port
+        read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
+        connection_type=${connection_type:-tcp}
+        argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+quic://$foreign_ip:$port"
 
-    read -p "Do you want to add more ports? (yes/no): " add_more_ports
-    additional_ports=""
-    while [ "$add_more_ports" == "yes" ]; do
-        read -p "Please Enter additional Config Ports separated by commas (e.g., 8081,8082): " additional_config_ports
-        additional_ports="$additional_ports $additional_config_ports"
         read -p "Do you want to add more ports? (yes/no): " add_more_ports
-    done
+        additional_ports=""
+        while [ "$add_more_ports" == "yes" ]; do
+            read -p "Please Enter additional Config Ports separated by commas (e.g., 8081,8082): " additional_config_ports
+            additional_ports="$additional_ports $additional_config_ports"
+            read -p "Do you want to add more ports? (yes/no): " add_more_ports
+        done
 
-    # Add additional ports to the argument
-    argument="-L $connection_type://:$additional_ports/127.0.0.1:$additional_ports $argument "
-    
-elif [ "$server_choice" == "2" ]; then
+        # Add additional ports to the argument
+        argument="-L $connection_type://:$additional_ports/127.0.0.1:$additional_ports $argument "
+        
+    elif [ "$server_choice" == "2" ]; then
         read -p "Enter servers connection Port : " port
         argument="-L relay+quic://:$port"
-        
         
     else
         echo "Invalid choice. Please enter '1' or '2'."
