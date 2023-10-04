@@ -2,5 +2,5 @@
 
 
 ```
-bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/GostTunnel/main/install.sh)
+bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/install.sh)
 ```
