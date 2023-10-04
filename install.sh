@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Access root cheack
+# Check if running as root
 root_access() {
     # Check if the script is running as root
     if [ "$EUID" -ne 0 ]; then
@@ -9,7 +9,7 @@ root_access() {
     fi
 }
 
-#Linux distribution
+# Detect Linux distribution
 detect_distribution() {
     local supported_distributions=("ubuntu" "debian" "centos" "fedora")
     
@@ -63,7 +63,7 @@ install_gost() {
 }
 
 #get inputs for 1
-questions1() {
+get_inputs1() {
     read -p "Enter foreign IP [External-ip] : " foreign_ip
     read -p "Enter Iran Port [Internal-port] :" port
     read -p "Enter Config Port [External-port] :" configport
@@ -105,11 +105,11 @@ EOL
 #install
 install() {
     install_gost
-    questions1
+    get_inputs1
 }
 
 #get inputs for 2
-questions2() {
+get_inputs2() {
     read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
     if [ "$server_choice" == "1" ]; then
         read -p "Enter foreign IP [External-ip] : " foreign_ip
@@ -161,11 +161,11 @@ EOL
 #install kcp
 install_kcp() {
     install_gost
-    questions2
+    get_inputs2
 }
 
 #get inputs for 3
-questions3() {
+get_inputs3() {
     read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
     if [ "$server_choice" == "1" ]; then
         read -p "Enter foreign IP [External-ip] : " foreign_ip
@@ -217,11 +217,11 @@ EOL
 #install wss
 install_wss() {
     install_gost
-    questions3 
+    get_inputs3 
 }
 
 #get inputs for 4
-questions4() {
+get_inputs4() {
     read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
     if [ "$server_choice" == "1" ]; then
         read -p "Enter foreign IP [External-ip] : " foreign_ip
@@ -274,10 +274,10 @@ EOL
 #install tls
 install_tls() {
     install_gost
-    questions4
+    get_inputs4
 }
 
-questions5() {
+get_inputs5() {
     read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External]): " server_choice
     if [ "$server_choice" == "1" ]; then
         read -p "Enter foreign IP [External-ip]: " foreign_ip
@@ -331,7 +331,7 @@ EOL
 #install quic
 install_quic() {
     install_gost
-    questions5
+    get_inputs5
 }
 
 #Uninstall 
