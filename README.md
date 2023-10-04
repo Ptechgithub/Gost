@@ -1,4 +1,4 @@
-# Go Simple Tunnel (gost tunnel)
+# Go Simple Tunnel (Gost)
 
 
 ## install
