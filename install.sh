@@ -51,44 +51,13 @@ check_installed() {
     fi
 }
 
-get_download_url() {
-    local system=""
-    local architecture=$(uname -m)
-
-    if [[ "$architecture" == "x86_64" ]]; then
-        system="linux-amd64"
-    elif [[ "$architecture" == "x86" ]]; then
-        system="linux-386"
-    elif [[ "$architecture" == "aarch64" ]]; then
-        system="linux-arm64"
-    elif [[ "$architecture" == "armv7l" ]]; then
-        system="linux-armv7"
-    elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-        if [[ "$architecture" == "x86_64" ]]; then
-            system="windows-amd64"
-        elif [[ "$architecture" == "aarch64" ]]; then
-            system="windows-arm64"
-        else
-            echo "Unknown Windows architecture!"
-            exit 1
-        fi
-    else
-        echo "Unknown architecture or OS!"
-        exit 1
-    fi
-
-    local download_url="https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-$system-2.11.5.gz"
-    echo "$download_url"
-}
-
 #Install gost
 install_gost() {
     check_installed
     check_dependencies
-    get_download_url
-    wget $download_url
-    gunzip gost-$system-2.11.5.gz
-    sudo mv gost-$system-2.11.5 /usr/local/bin/gost
+    wget https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz
+    gunzip gost-linux-amd64-2.11.5.gz
+    sudo mv gost-linux-amd64-2.11.5 /usr/local/bin/gost
     sudo chmod +x /usr/local/bin/gost
     
 }
