@@ -245,6 +245,12 @@ questions5() {
         connection_type=${connection_type:-tcp}
         argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+quic://$foreign_ip:$port"
         
+        read -p "Do you want to add more ports? (yes/no): " add_more_ports
+        while [ "$add_more_ports" == "yes" ]; do
+            read -p "Please Enter an additional Config Port: " additional_config_port
+            argument="-L $connection_type://:$additional_config_port/127.0.0.1:$additional_config_port $argument "
+            read -p "Do you want to add more ports? (yes/no): " add_more_ports
+        done
         
     elif [ "$server_choice" == "2" ]; then
         read -p "Enter servers connection Port : " port
