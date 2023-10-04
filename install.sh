@@ -197,7 +197,7 @@ questions4() {
         read -p "Please Enter your Config Port : " config_port
         read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
         connection_type=${connection_type:-tcp}
-        argument="-L $connection_type://127.0.0.1:$config_port -F relay+tls://$foreign_ip:$port"
+        argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+tls://$foreign_ip:$port"
         
     elif [ "$server_choice" == "2" ]; then
         read -p "Enter servers connection Port : " port
@@ -255,7 +255,7 @@ uninstall() {
 
 # Main menu 
 clear
-echo "By --1> Peyman * Github.com/Ptechgithub * "
+echo "By --> Peyman * Github.com/Ptechgithub * "
 echo " --------#- Go simple Tunnel-#--------"
 echo ""
 echo "1) Install Gost [only Internal Server]"
