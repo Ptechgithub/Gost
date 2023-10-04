@@ -43,7 +43,7 @@ check_dependencies() {
     done
 }
 
-#Check installed service
+#Check installed service 
 check_installed() {
     if [ -f "/etc/systemd/system/gost.service" ]; then
         echo "The service is already installed."
