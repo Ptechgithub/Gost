@@ -154,8 +154,9 @@ questions3() {
         argument="-L $connection_type://:$config_port  -F relay+wss://$foreign_ip:$port"
         
     elif [ "$server_choice" == "2" ]; then
+        read -p "Please Enter your Config Port : " config_port
         read -p "Enter servers connection Port : " port
-        argument="-L relay+wss://:$port"
+        argument="-L relay+wss://:$port/:$config_port"
     else
         echo "Invalid choice. Please enter '1' or '2'."
         exit 1
