@@ -236,30 +236,29 @@ install_tls() {
 }
 
 questions5() {
-    read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
+    read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External]): " server_choice
     if [ "$server_choice" == "1" ]; then
-        read -p "Enter foreign IP [External-ip] : " foreign_ip
-        read -p "Please Enter servers connection Port : " port
-        read -p "Please Enter your Config Port : " config_port
+        read -p "Enter foreign IP [External-ip]: " foreign_ip
+        read -p "Please enter the server's connection port: " port
+        read -p "Please enter your config port: " config_port
         read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
         connection_type=${connection_type:-tcp}
         argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+quic://$foreign_ip:$port"
 
         read -p "Do you want to add more ports? (yes/no): " add_more_ports
-        additional_ports=""
         while [ "$add_more_ports" == "yes" ]; do
-            read -p "Please Enter additional Config Ports separated by commas (e.g., 8081,8082): " additional_config_ports
-            additional_ports="$additional_ports $additional_config_ports"
+            read -p "Please enter additional config port(s) separated by commas (e.g., 2087,2095): " additional_config_ports
+            IFS=',' read -r -a ports_array <<< "$additional_config_ports"
+            for new_port in "${ports_array[@]}"; do
+                argument="-L $connection_type://:$new_port/127.0.0.1:$new_port $argument"
+            done
             read -p "Do you want to add more ports? (yes/no): " add_more_ports
         done
 
-        # Add additional ports to the argument
-        argument="-L $connection_type://:$additional_ports/127.0.0.1:$additional_ports $argument "
-        
     elif [ "$server_choice" == "2" ]; then
-        read -p "Enter servers connection Port : " port
+        read -p "Enter server's connection port: " port
         argument="-L relay+quic://:$port"
-        
+
     else
         echo "Invalid choice. Please enter '1' or '2'."
         exit 1
@@ -285,6 +284,7 @@ EOL
     sudo systemctl enable gost.service
     sudo systemctl start gost.service
 }
+
 
 #install quic
 install_quic() {
@@ -312,7 +312,7 @@ uninstall() {
 
 # Main menu 
 clear
-echo "By 1--> Peyman * Github.com/Ptechgithub * "
+echo "By --> Peyman * Github.com/Ptechgithub * "
 echo ""
 echo " --------#- Go simple Tunnel-#--------"
 echo "1) Install Gost [only Internal Server]"
