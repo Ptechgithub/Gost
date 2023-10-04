@@ -189,7 +189,7 @@ install_wss() {
     questions3 
 }
 
-#get inputs for 3
+#get inputs for 4
 questions4() {
     read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
     if [ "$server_choice" == "1" ]; then
@@ -201,7 +201,6 @@ questions4() {
         argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+tls://$foreign_ip:$port"
         
     elif [ "$server_choice" == "2" ]; then
-        read -p "Please Enter your Config Port : " config_port
         read -p "Enter servers connection Port : " port
         argument="-L relay+tls://:$port"
         
