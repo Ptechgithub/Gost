@@ -189,6 +189,54 @@ install_wss() {
     questions3 
 }
 
+#get inputs for 3
+questions4() {
+    read -p "Which server do you want to use? (Enter '1' for Iran[Internal] or '2' for Foreign[External] ) : " server_choice
+    if [ "$server_choice" == "1" ]; then
+        read -p "Enter foreign IP [External-ip] : " foreign_ip
+        read -p "Please Enter servers connection Port : " port
+        read -p "Please Enter your Config Port : " config_port
+        read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
+        connection_type=${connection_type:-tcp}
+        argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+tls://$foreign_ip:$port"
+        
+    elif [ "$server_choice" == "2" ]; then
+        read -p "Please Enter your Config Port : " config_port
+        read -p "Enter servers connection Port : " port
+        argument="-L relay+tls://:$port"
+        
+    else
+        echo "Invalid choice. Please enter '1' or '2'."
+        exit 1
+    fi
+
+    cd /etc/systemd/system
+
+    cat <<EOL>> gost.service
+[Unit]
+Description=GO Simple Tunnel
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/gost $argument
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable gost.service
+    sudo systemctl start gost.service
+}
+
+#install tls
+install_tls() {
+    install_gost
+    questions4
+}
+
 #Uninstall 
 uninstall() {
     if ! command -v gost &> /dev/null
@@ -218,7 +266,9 @@ echo "2) Install Gost [relay + kcp]"
 echo " ----------------------------"
 echo "3) Install Gost [relay + wss]"
 echo " ----------------------------"
-echo "4) Uninstall Gost"
+echo "4) Install Gost [relay + tls]"
+echo " ----------------------------"
+echo "5) Uninstall Gost"
 echo " ----------------------------"
 echo "0) exit"
 read -p "Please choose: " choice
@@ -235,7 +285,10 @@ case $choice in
         install_wss
         ;;
      4)
-        uninstall
+        install_tls
+        ;;
+      5)
+         uninstall
         ;;
     0)
         exit
