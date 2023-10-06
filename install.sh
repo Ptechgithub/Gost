@@ -450,7 +450,7 @@ case $choice in
         install_quic
        ;;
      6)
-         install _custom
+         install_custom
         ;;
       7)
          uninstall
