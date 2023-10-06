@@ -387,7 +387,7 @@ EOL
 }
 
 #install custom
-install_quic() {
+install_custom() {
     install_gost
     get_inputs6
 }
@@ -425,7 +425,9 @@ echo "4) Install Gost [relay + tls]"
 echo " ----------------------------"
 echo "5) Install Gost [relay + quic]"
 echo " ----------------------------"
-echo "6) Uninstall Gost"
+echo "6) Install Custom"
+echo " ----------------------------"
+echo "7) Uninstall Gost"
 echo " ----------------------------"
 echo "0) exit"
 read -p "Please choose: " choice
@@ -448,6 +450,9 @@ case $choice in
         install_quic
        ;;
      6)
+         install _custom
+        ;;
+      7)
          uninstall
         ;;
     0)
