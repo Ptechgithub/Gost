@@ -9,8 +9,16 @@ bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/instal
 
 - در روش اول فقط نیاز به اجرا روی سرور داخلی(ایران) دارید.
 - باقی روش ها روی هردو سرور ( داخلی - خارجی ) اجرا کنید.
+
 - support tcp & udp
 - kcp
 - wss
 - tls
 - quic
+
+
+## Gost in Termux (No root)
+
+```
+bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/Termux.sh)
+```
