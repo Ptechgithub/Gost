@@ -229,7 +229,7 @@ get_inputs4() {
         read -p "Please Enter your Config Port : " config_port
         read -p "Enter 'udp' for UDP connection (default is: tcp): " connection_type
         connection_type=${connection_type:-tcp}
-        argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay+tls://$foreign_ip:$port"
+        argument="-L $connection_type://:$config_port/127.0.0.1:$config_port -F relay://$foreign_ip:$port"
         
         read -p "Do you want to add more ports? (yes/no): " add_more_ports
         while [ "$add_more_ports" == "yes" ]; do
@@ -243,7 +243,7 @@ get_inputs4() {
 
     elif [ "$server_choice" == "2" ]; then
         read -p "Enter servers connection Port : " port
-        argument="-L relay+tls://:$port"
+        argument="-L relay://:$port"
         
     else
         echo "Invalid choice. Please enter '1' or '2'."
@@ -272,7 +272,7 @@ EOL
 }
 
 #install tls
-install_tls() {
+install_relay() {
     install_gost
     get_inputs4
 }
@@ -417,11 +417,11 @@ echo ""
 echo " --------#- Go simple Tunnel-#--------"
 echo "1) Install Gost [only Internal Server]"
 echo " ----------------------------"
-echo "2) Install Gost [relay + kcp]"
+echo "2) Install Gost [relay]"
 echo " ----------------------------"
 echo "3) Install Gost [relay + wss]"
 echo " ----------------------------"
-echo "4) Install Gost [relay + tls]"
+echo "4) Install Gost [relay + kcp]"
 echo " ----------------------------"
 echo "5) Install Gost [relay + quic]"
 echo " ----------------------------"
@@ -438,13 +438,13 @@ case $choice in
         install
         ;;
     2)
-        install_kcp
+        install_relay
         ;;
      3)
         install_wss
         ;;
      4)
-        install_tls
+        install_kcp
         ;;
      5)
         install_quic
