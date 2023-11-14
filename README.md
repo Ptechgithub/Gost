@@ -22,3 +22,4 @@ bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/instal
 ```
 bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/Termux.sh)
 ```
+![7](https://raw.githubusercontent.com/Ptechgithub/configs/main/media/7.jpg)
