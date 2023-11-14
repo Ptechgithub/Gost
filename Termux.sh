@@ -54,7 +54,7 @@ login() {
 clear
 echo "By 2--> Peyman * Github.com/Ptechgithub * "
 echo ""
-echo "-----Gost Tunnel inTermux----"
+echo "-----Gost Tunnel in Termux----"
 echo "Select an option:"
 echo ""
 echo "1) step 1 [install debian]"
