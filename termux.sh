@@ -46,6 +46,11 @@ step3() {
     ./gost -L $connection_type://:$config_port/127.0.0.1:$config_port -F $protocol://$ip:$connection_port
 }
 
+login() {
+    proot-distro login debian
+}
+
+
 clear
 echo "By 2--> Peyman * Github.com/Ptechgithub * "
 echo ""
@@ -55,6 +60,8 @@ echo ""
 echo "1) step 1 [install debian]"
 echo "2) Step 2 [install Gost]"
 echo "3) Step 3 [Run Gost Tunnel]"
+echo "4) LOGIN AGAIN"
+
 echo "-----------------------------"
 echo "0) Exit"
 read -p "Enter your choice: " choice
@@ -67,6 +74,9 @@ case "$choice" in
         ;;
     3)
         step3
+        ;;
+    4)
+        login
         ;;
     0)
         exit
