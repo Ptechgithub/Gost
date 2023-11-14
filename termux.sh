@@ -29,7 +29,7 @@ step2() {
     apt install wget -y
     wget https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-armv6-2.11.5.gz
     gunzip gost-linux-armv6-2.11.5.gz
-    mv gost-linux-armv6-2.11.5.gz gost
+    mv gost-linux-armv6-2.11.5 gost
     chmod +x gost
 }
 
