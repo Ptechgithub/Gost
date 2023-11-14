@@ -42,7 +42,7 @@ step3() {
     connection_type=${connection_type:-tcp}
     read -p "Enter your protocol (example: relay+wss)  [default : relay] : " protocol
     protocol=${protocol:-relay}
-    ./gost -L connection_type://:$config_port/127.0.0.1:$config_port -F $protocol://$ip:$connection_port
+    ./gost -L $connection_type://:$config_port/127.0.0.1:$config_port -F $protocol://$ip:$connection_port
 }
 
 clear
