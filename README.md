@@ -14,8 +14,7 @@ bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/instal
 - kcp
 - wss
 - quic
-
-...
+- ...
 
 ## Gost in Termux (No root)
 
