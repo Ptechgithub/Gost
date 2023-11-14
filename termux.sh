@@ -60,7 +60,7 @@ echo ""
 echo "1) step 1 [install debian]"
 echo "2) Step 2 [install Gost]"
 echo "3) Step 3 [Run Gost Tunnel]"
-echo "4) Login  to root"
+echo "4) Login  as root"
 
 echo "-----------------------------"
 echo "0) Exit"
