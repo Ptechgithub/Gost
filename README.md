@@ -13,9 +13,8 @@ bash <(curl -fsSl https://raw.githubusercontent.com/Ptechgithub/Gost/main/instal
 - support tcp & udp
 - kcp
 - wss
-- tls
 - quic
-
+...
 
 ## Gost in Termux (No root)
 
