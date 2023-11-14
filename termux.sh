@@ -42,7 +42,7 @@ step3() {
     connection_type=${connection_type:-tcp}
     read -p "Enter your protocol (example: relay+wss)  [default : relay] : " protocol
     protocol=${protocol:-relay}
-    echo "Tunnel run :127.0.0.1:$config_port"
+    echo "Your tunnel is established at :127.0.0.1:$config_port"
     ./gost -L $connection_type://:$config_port/127.0.0.1:$config_port -F $protocol://$ip:$connection_port
 }
 
