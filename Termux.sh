@@ -47,6 +47,7 @@ step3() {
 }
 
 login() {
+    clear
     proot-distro login debian
 }
 
