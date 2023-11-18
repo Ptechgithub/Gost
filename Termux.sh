@@ -18,6 +18,7 @@ step1() {
     pkg update
     check_dependencies
     proot-distro install debian
+    clear
     proot-distro login debian
 }
 
